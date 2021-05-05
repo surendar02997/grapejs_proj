@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import grapesjs from 'node_modules/grapesjs';
+import 'grapesjs-preset-newsletter';
 
 @Component({
   selector: 'app-root',
@@ -16,13 +17,22 @@ export class AppComponent implements OnInit{
     this.editor = grapesjs.init({
 
       container: '#gjs',
+
+      // plugins: ['gjs-preset-newsletter'],
+      // pluginsOpts: {
+      //   'gjs-preset-newsletter': {
+      //     // options
+      //   }
+      // },
+      
       // Get the content for the canvas directly from the element
       // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
        fromElement: true,
       // // Size of the editor
        height: '500px',
        width: 'auto',
-      // storageManager: false,
+      //storageManager: false,
+      
 
       blockManager: {
         
@@ -40,17 +50,8 @@ export class AppComponent implements OnInit{
        },
        panels: { 
        
-
-        // id: 'basic-actions',
-        // el: '.panel__basic-actions',
-        // buttons: [
-        //   {
-        //     id: 'alert-button',
-        //     className: 'btn-alert-button',
-        //     label: 'Click my butt(on)',
-        //     command(editor) { alert('Hello World'); }
-        //   }
-        // ]
+       // defaults: []  //this will disable all default panels
+      
       },
       commands: {
         // options
@@ -62,66 +63,16 @@ export class AppComponent implements OnInit{
         const panelManager = this.editor.Panels;
         const commands = this.editor.Commands;
 
-        commands.add('myCommand', {
-          run(editor, sender) {
-            alert('Hello world!');
-          },
-          stop(editor, sender) {
-          },
-        });
-
-        // this.editor.Panels.addPanel({
-        //   id: 'panel-top',
-        //   el: '.panel__top',
-        // });
-        // this.editor.Panels.addPanel({
-        //   id: 'basic-actions',
-        //   el: '.panel__basic-actions',
-        //   buttons: [
-        //     {
-        //       id: 'visibility',
-        //       active: true, // active by default
-        //       className: 'btn-toggle-borders',
-        //       label: '<u>B</u>',
-        //       command: 'sw-visibility', // Built-in command
-        //     }, {
-        //       id: 'export',
-        //       className: 'btn-open-export',
-        //       label: 'Exp',
-        //       command: 'export-template',
-        //       context: 'export-template', // For grouping context of buttons from the same panel
-        //     }, {
-        //       id: 'show-json',
-        //       className: 'btn-show-json',
-        //       label: 'JSON',
-        //       context: 'show-json',
-        //       command(editor) {
-        //         editor.Modal.setTitle('Components JSON')
-        //           .setContent(`<textarea style="width:100%; height: 250px;">
-        //             ${JSON.stringify(editor.getComponents())}
-        //           </textarea>`)
-        //           .open();
-        //       },
-        //     }
-        //   ],
+        // commands.add('myCommand', {
+        //   run(editor, sender) {
+        //     alert('Hello world!');
+        //   },
+        //   stop(editor, sender) {
+        //   },
         // });
 
-        // this.editor.on('run:export-template:before', opts => {
-        //   console.log('Before the command run');
-        //   alert('hi');
-        //   if (0 /* some condition */) {
-        //     opts.abort = 1;
-        //   }
-        // });
-        // this.editor.on('run:export-template', () =>  alert('hi'));
-        // this.editor.on('abort:export-template', () =>  alert('hi'));
+        this.editor.getConfig().showDevices = false;  //to remove the show device from top
 
-        // var newPanel = panelManager.addPanel({
-        //   id: 'myNewPanel',
-        //  visible  : true,
-        //  buttons  : [],
-         
-        // });
       
         
 
@@ -138,8 +89,10 @@ export class AppComponent implements OnInit{
         label: 'Heading',
         content: '<h1>Put your title here</h1>',
         category: 'Basic',
+       
         attributes: {
-        title: 'Insert h1 block'
+        title: 'Insert h1 block',
+       
         }
 
         });
@@ -148,8 +101,13 @@ export class AppComponent implements OnInit{
           content: '<p>Put your Parahraph here</p>',
           category: 'Basic',
           attributes: {
-            title: 'Insert p block'
-          }
+            
+            title: 'Insert p block',
+           // class: 'fa fa-text'
+           
+          },
+      
+        
         
         });
         blockManager.add('img-block', {
@@ -175,39 +133,44 @@ export class AppComponent implements OnInit{
             removable: false, // Once inserted it can't be removed
           }
         });
-        blockManager.add('the-row-block', {
-          label: '2 Columns',
-          content: '<div class="row" data-gjs-droppable=".row-cell" data-gjs-custom-name="Row">' +
-              '<div class="row-cell" data-gjs-draggable=".row">1row</div>' +
-              '<div class="row-cell" data-gjs-draggable=".row">2row</div>' +
-            '</div>',
-            render: ({ el }) => {
-              const btn = document.createElement('button');
-              btn.innerHTML = 'Click me';
-              btn.addEventListener('click', () => alert('Do something'))
-              el.appendChild(btn);
-            },
-        });
-       
-
-         commands: {
-   // options
- }
-
-        const block = blockManager.getAll();
-        console.log(JSON.stringify(block));
-        
-        // const removedButton = panelManager.addButton('myNewPanel',{
-        //   id: 'myNewButton',
-        //   className: 'someClass',
-        //   command: 'someCommand',
-        //   attributes: { title: 'Some title'},
-        //   active: false,
+        // blockManager.add('the-row-block', {
+        //   label: '2 Columns',
+        //   content: '<div class="row" data-gjs-droppable=".row-cell" data-gjs-custom-name="Row">' +
+        //       '<div class="row-cell" data-gjs-draggable=".row">1row</div>' +
+        //       '<div class="row-cell" data-gjs-draggable=".row">2row</div>' +
+        //     '</div>',
+        //     render: ({ el }) => {
+        //       const btn = document.createElement('button');
+        //       btn.innerHTML = 'Click me';
+        //       btn.addEventListener('click', () => alert('Do something'))
+        //       el.appendChild(btn);
+        //     },
         // });
 
-        // console.log(JSON.stringify(removedButton));
-
+        blockManager.add('the-row-block', {
+          label: '2 Columns',
+          content: `
+          <div class="row" data-gjs-droppable=".row-cell" data-gjs-custom-name="Row">
+            <div class="row-cell" data-gjs-draggable=".row"></div>
+            <div class="row-cell" data-gjs-draggable=".row"></div>
+          </div>
         
+        `,
+     
+        });
+  
+
+
+
+       const block = blockManager.getAll();
+       console.log(JSON.stringify(block));
+        
+       
+
+        panelManager.addPanel({
+          id: 'panel-top',
+          el: '.panel__top',
+        });
         panelManager.addPanel({
           id: 'basic-actions',
           el: '.panel__basic-actions',
@@ -239,6 +202,12 @@ export class AppComponent implements OnInit{
             }
           ]
         });
+
+        panelManager.addButton('options', [ 
+          { id: 'save', className: 'fa fa-floppy-o icon-blank', command: function(editor1, sender) { alert('save button clicked') }, 
+          attributes: { title: 'Save Template' } 
+        }, 
+      ]);
         
       //  const removedButton = panelManager.removeButton('myNewPanel', 'myNewButton');
        // var asset = assetManager.getAllVisible();
