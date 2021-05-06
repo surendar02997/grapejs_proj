@@ -50,10 +50,77 @@ export class AppComponent implements OnInit{
        },
        panels: { 
        
-       // defaults: []  //this will disable all default panels
+       // defaults: [
+          // {
+          //   id: 'panel-switcher',
+          //   el: '.panel__switcher',
+          //   buttons: [{
+          //       id: 'show-layers',
+          //       active: true,
+          //       label: 'Layers',
+          //       command: 'show-layers',
+          //       // Once activated disable the possibility to turn it off
+          //       togglable: false,
+          //     }, {
+          //       id: 'show-style',
+          //       active: true,
+          //       label: 'Styles',
+          //       command: 'show-styles',
+          //       togglable: false,
+          //   }],
+          // }
+      //  ]  //this will disable all default panels
       
       },
+      // selectorManager: {
+      //   appendTo: '.styles-container'
+      // },
+      // styleManager: {
+      //   appendTo: '.styles-container',
+      //   sectors: [{
+      //       name: 'Dimension',
+      //       open: false,
+      //       // Use built-in properties
+      //       buildProps: ['width', 'min-height', 'padding'],
+      //       // Use `properties` to define/override single property
+      //       properties: [
+      //         {
+      //           // Type of the input,
+      //           // options: integer | radio | select | color | slider | file | composite | stack
+      //           type: 'integer',
+      //           name: 'The width', // Label for the property
+      //           property: 'width', // CSS property (if buildProps contains it will be extended)
+      //           units: ['px', '%'], // Units, available only for 'integer' types
+      //           defaults: 'auto', // Default value
+      //           min: 0, // Min value, available only for 'integer' types
+      //         }
+      //       ]
+      //     },{
+      //       name: 'Extra',
+      //       open: false,
+      //       buildProps: ['background-color', 'box-shadow', 'custom-prop'],
+      //       properties: [
+      //         {
+      //           id: 'custom-prop',
+      //           name: 'Custom Label',
+      //           property: 'font-size',
+      //           type: 'select',
+      //           defaults: '32px',
+      //           // List of options, available only for 'select' and 'radio'  types
+      //           options: [
+      //             { value: '12px', name: 'Tiny' },
+      //             { value: '18px', name: 'Medium' },
+      //             { value: '32px', name: 'Big' },
+      //           ],
+      //        }
+      //       ]
+      //     }]
+      // },
+
+
+      
       commands: {
+        
         // options
       }
       
@@ -71,9 +138,34 @@ export class AppComponent implements OnInit{
         //   },
         // });
 
-        this.editor.getConfig().showDevices = false;  //to remove the show device from top
+         this.editor.getConfig().showDevices = false;  //to remove the show device from top
 
-      
+        // this.editor.Commands.add('show-layers', {
+        //   getRowEl(editor) { return editor.getContainer().closest('.editor-row'); },
+        //   getLayersEl(row) { return row.querySelector('.layers-container') },
+        
+        //   run(editor, sender) {
+        //     const lmEl = this.getLayersEl(this.getRowEl(editor));
+        //     lmEl.style.display = '';
+        //   },
+        //   stop(editor, sender) {
+        //     const lmEl = this.getLayersEl(this.getRowEl(editor));
+        //     lmEl.style.display = 'none';
+        //   },
+        // });
+        // this.editor.Commands.add('show-styles', {
+        //   getRowEl(editor) { return editor.getContainer().closest('.editor-row'); },
+        //   getStyleEl(row) { return row.querySelector('.styles-container') },
+        
+        //   run(editor, sender) {
+        //     const smEl = this.getStyleEl(this.getRowEl(editor));
+        //     smEl.style.display = '';
+        //   },
+        //   stop(editor, sender) {
+        //     const smEl = this.getStyleEl(this.getRowEl(editor));
+        //     smEl.style.display = 'none';
+        //   },
+        // });
         
 
        
@@ -89,9 +181,12 @@ export class AppComponent implements OnInit{
         label: 'Heading',
         content: '<h1>Put your title here</h1>',
         category: 'Basic',
+        select: true,
+        activate: true,
        
         attributes: {
         title: 'Insert h1 block',
+     //   class:'fa fa-heading'
        
         }
 
@@ -103,7 +198,7 @@ export class AppComponent implements OnInit{
           attributes: {
             
             title: 'Insert p block',
-           // class: 'fa fa-text'
+            class:'fa fa-paragraph'
            
           },
       
@@ -117,38 +212,54 @@ export class AppComponent implements OnInit{
           category: 'Basic',
           select: true,
           
-          activate: true,
+         activate: true,
           attributes: {
-            title: 'Insert img block'
+            title: 'Insert img block',
+            class: 'fa fa-image'
           }
         
         });
-        blockManager.add('my-map-block', {
+        blockManager.add('map', {
           label: 'Simple map block',
+          category: 'Basic',
           content: {
             type: 'map', // Built-in 'map' component
             style: {
               height: '350px'
             },
+            attributes: {
+              title: 'Simple map block',
+              class:'fa fa-map-o'
+             
+            },
             removable: false, // Once inserted it can't be removed
           }
         });
-        // blockManager.add('the-row-block', {
-        //   label: '2 Columns',
-        //   content: '<div class="row" data-gjs-droppable=".row-cell" data-gjs-custom-name="Row">' +
-        //       '<div class="row-cell" data-gjs-draggable=".row">1row</div>' +
-        //       '<div class="row-cell" data-gjs-draggable=".row">2row</div>' +
-        //     '</div>',
-        //     render: ({ el }) => {
-        //       const btn = document.createElement('button');
-        //       btn.innerHTML = 'Click me';
-        //       btn.addEventListener('click', () => alert('Do something'))
-        //       el.appendChild(btn);
-        //     },
-        // });
+      blockManager.add('link-replace', {
+        name: 'link-replace',
+        category: 'Extra',
+        label: 'Link Replace',
+        content: {
+          removable: true,
+          draggable: true,
+          droppable: true,
+          script: "console.log('the element', this)",
+          components: "<h2>Test Block</h2>",
+          traits: ['link-replace','name'],
+          style: {
+            width: '100px',
+            height: '100px'
+          }
+        },
+        attributes: {
+          title: 'Link Replace',
+          class: 'fa fa-external-link'
+        }
+      });
 
         blockManager.add('the-row-block', {
           label: '2 Columns',
+          category: 'Basic',
           content: `
           <div class="row" data-gjs-droppable=".row-cell" data-gjs-custom-name="Row">
             <div class="row-cell" data-gjs-draggable=".row"></div>
@@ -156,9 +267,30 @@ export class AppComponent implements OnInit{
           </div>
         
         `,
+     //   content:{type:'cell'},
+        attributes:{class:'fa fa-columns'}
      
         });
-  
+      
+        blockManager.add('content-link', {
+          label:'Youtube Link',
+          category:'Basic',
+          attributes: { class:'fa fa-youtube' },
+          content:{
+              type:'content-link'
+          }
+      });
+
+      blockManager.add('INPUT',{
+        id:'input',
+        label:'Input',
+        category:'Basic',
+          attributes: { 
+            //class:'fa fa-youtube' 
+          },
+          content:'<div><input class="form-control" type="text"></div>'
+
+      })
 
 
 
@@ -169,11 +301,11 @@ export class AppComponent implements OnInit{
 
         panelManager.addPanel({
           id: 'panel-top',
-          el: '.panel__top',
+         // el: '.panel__top',
         });
         panelManager.addPanel({
           id: 'basic-actions',
-          el: '.panel__basic-actions',
+         // el: '.panel__basic-actions',
           buttons: [
             {
               id: 'visibility',
@@ -199,7 +331,10 @@ export class AppComponent implements OnInit{
                   </textarea>`)
                   .open();
               },
+
+              
             }
+            
           ]
         });
 
@@ -212,6 +347,66 @@ export class AppComponent implements OnInit{
       //  const removedButton = panelManager.removeButton('myNewPanel', 'myNewButton');
        // var asset = assetManager.getAllVisible();
        // console.log(JSON.stringify(asset));
+
+
+
+       this.editor.DomComponents.addType('content-link', {
+        extend: 'link',
+        model: {
+            defaults: {
+          editable: true,
+          droppable: true,
+          select: true,
+          
+          activate: true,
+                style: {
+                    display: 'inline-block',
+                    padding: '5px',
+                    'min-height': '50px',
+                    'min-width': '50px'
+                },
+               
+                attributes:{href:'https://www.youtube.com/'},
+                // content: '{{ $content->title }}',
+                content: '{{ Youtube }}',
+            }
+        }
+    });
+
+
+
+
+    //Adding new input component
+    this.editor.DomComponents.addType('input', {
+      isComponent: el => el.tagName == 'INPUT',
+      model: {
+        defaults: {
+          traits: [
+            // Strings are automatically converted to text types
+            'name', // Same as: { type: 'text', name: 'name' }
+            'placeholder',
+            {
+              type: 'select', // Type of the trait
+              label: 'Type', // The label you will see in Settings
+              name: 'type', // The name of the attribute/property to use on component
+              options: [
+                { id: 'text', name: 'Text'},
+                { id: 'email', name: 'Email'},
+                { id: 'password', name: 'Password'},
+                { id: 'number', name: 'Number'},
+              ]
+            }, {
+              type: 'checkbox',
+              name: 'required',
+          }],
+          // As by default, traits are binded to attributes, so to define
+          // their initial value we can use attributes
+          attributes: { type: 'text', required: true },
+        },
+      },
+  });
+
+
   }
  
   
