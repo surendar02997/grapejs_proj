@@ -3,6 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import grapesjs from 'node_modules/grapesjs';
 import 'grapesjs-preset-newsletter';
 import 'grapesjs-firestore';
+import { ScreenService } from './screenservice.service';
+import { Post } from './post.model';
+import { Injectable } from '@angular/core';
+declare var $: any;
 
 
 @Component({
@@ -12,12 +16,31 @@ import 'grapesjs-firestore';
  
 })
 
+@Injectable()
 export class AppComponent implements OnInit{
+
+
+  constructor(private ScreenService:ScreenService){}
+
+
+  //logId:any;
+  postdatanew:Post;
+
+  htmlvalue:string;
+  cssvalue:string;
+
+  htmlcss:string;
 
   editor:any;
   ngOnInit()
   {
-   
+
+    
+
+
+    //this.logId = sessionStorage.getItem('LogId');
+    //console.log("logId",this.logId);
+    
    
       const LandingPage = {
       html: `<div>...</div>`,
@@ -25,7 +48,7 @@ export class AppComponent implements OnInit{
       components: null,
       style: null,
     };
-
+ 
     this.editor = grapesjs.init({
 
       container: '#gjs',
@@ -258,18 +281,22 @@ export class AppComponent implements OnInit{
       },
 
       storageManager: {
-    
-          type:'firestore',
-          autoload:true,
+        id: 'gjs-',
+          type:'local',
+         autoload:true,
           contentTypeJson: true,
           setStepsBeforeSave: 1,
           autosave: true,
+          storeComponents: true,  // Enable/Disable storing of components in JSON format
+          storeStyles: true,      // Enable/Disable storing of rules in JSON format
+          storeHtml: true,        // Enable/Disable storing of components as HTML string
+          storeCss: true, 
 
             //   autosave: false,
             //   setStepsBeforeSave: 1,
             //   type: 'remote',
-            // //  urlStore: 'http://cimailer.dev/templates/template',
-            // //  urlLoad: 'http://cimailer.dev/templates/template',
+        //   urlStore: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts.json',
+           urlLoad: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts/-M_a-ts6Gc60Tm7fDYSN',
             //   contentTypeJson: true,
       },
       
@@ -282,17 +309,31 @@ export class AppComponent implements OnInit{
         const panelManager = this.editor.Panels;
         const commands = this.editor.Commands;
 
- 
+        this.htmlvalue = this.editor.getHtml();
+        this.cssvalue= this.editor.getCss();
+
+        this.htmlcss = this.editor.runCommand('gjs-get-inlined-html');
+
+        console.log("html",this.htmlvalue);
+        console.log("css",this.cssvalue);
+        console.log("htmlcss",this.htmlcss);
+        
        
          this.editor.getConfig().showDevices = false;  //to remove the show device from top
 
-       //  this.editor.load(res => console.log('Load callback',res));
-       //  this.editor.store(res => console.log('Store callback',res));
-     
+        //  this.editor.load(res => console.log('Load callback',res));
+        // this.editor.store(res => console.log('Store callback',res));
+
+        this.sendpostdata();
+      
        this.editor.on('storage:load', function(e) {
+        
         console.log('STORAGE:LOAD ', e);
+        
+        
       });
       this.editor.on('storage:store', function(e) {
+        
         console.log('STORAGE:STORE ', e);
       });
       this.editor.on('storage:error', function(e) {
@@ -300,11 +341,10 @@ export class AppComponent implements OnInit{
       });
       this.editor= this.editor;
 
-      var html = this.editor.getHtml();
-      var css = this.editor.getCss();
-      console.log("html",html);
-      console.log("css",css);
-      
+    
+
+     
+   
 
       //firebase.firestore().settings({ experimentalForceLongPolling: true });
 
@@ -498,12 +538,14 @@ export class AppComponent implements OnInit{
         panelManager.addButton('options', [ 
           { id: 'save', 
           className: 'fa fa-floppy-o icon-blank', 
-          command:'save-db',
-          // command: function(editor1, sender) { 
-          //   if (sender)
-          //   sender.set('active', false);
+         // command:'save-db',
+          command: function(editor1, sender) { 
+            if (sender)
+            sender.set('active', false);
+          
+           // this.sendpostdata();
 
-          // }, 
+          }, 
           attributes: { title: 'Save Template' } 
         }, 
       ]);
@@ -512,8 +554,12 @@ export class AppComponent implements OnInit{
         ('save-db', {
             run: function(editor, sender)
             {
-             // sender && sender.set('active'); // turn off the button
-             // editor.store();
+              sender && sender.set('active',false); // turn off the button
+              editor.store();
+              console.log("hi");
+              
+           //  this.sendpostdata();
+            // alert();
             }
         });
         // this.editor.on('storage:load', function(e) { console.log('Loaded ', e);});
@@ -596,6 +642,16 @@ export class AppComponent implements OnInit{
 
 
 
+  }
+  sendpostdata()
+  {
+   //this.postservice.oncreateandstorepost(postdata.name,postdata.hobby);
+   //alert();
+   this.ScreenService.OnSendPostData(this.htmlvalue,this.cssvalue);
+   //this.ScreenService.OnSendPostDatasample(7);
+  
+   
+   
   }
  
   

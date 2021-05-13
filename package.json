@@ -24,6 +24,7 @@
     "firebase": "7.14.6",
     "grapesjs": "^0.17.3",
     "grapesjs-firestore": "^0.1.1",
+    "jquery": "^3.6.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
@@ -33,6 +34,7 @@
     "@angular/cli": "~11.2.10",
     "@angular/compiler-cli": "~11.2.11",
     "@types/jasmine": "~3.6.0",
+    "@types/jquery": "^3.5.5",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
