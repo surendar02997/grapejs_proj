@@ -8,6 +8,8 @@ import { Post } from './post.model';
 import { Injectable } from '@angular/core';
 declare var $: any;
 
+import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
@@ -20,7 +22,7 @@ declare var $: any;
 export class AppComponent implements OnInit{
 
 
-  constructor(private ScreenService:ScreenService){}
+  constructor(private ScreenService:ScreenService,private http:HttpClient){}
 
 
   //logId:any;
@@ -29,9 +31,14 @@ export class AppComponent implements OnInit{
   htmlvalue:string;
   cssvalue:string;
 
+  finalgjsvalues:string;
+  RemoteStorage: any;
+  screenname:string;
+
   htmlcss:string;
 
   editor:any;
+ 
   ngOnInit()
   {
 
@@ -202,69 +209,7 @@ export class AppComponent implements OnInit{
               },
             ]
           }
-          // {
-          //   name:'Decorations',
-          //   open:false,
-          //   buildProps: ['border-right-style','border-left-style','border-radius'],
-          //   properties:[
-              
-          //     {
-          //       name: 'Width',
-          //       type: 'integer',
-          //       units: ['px', 'em', 'rem'],
-          //       property: 'border-right-width',
-          //     },
-          //     {
-          //       name: 'Border left Width',
-          //       type: 'integer',
-          //       units: ['px', 'em', 'rem'],
-          //       property: 'border-left-width',
-          //     },
-          //     {
-          //       name: 'Style',
-          //       type: 'select',
-          //       property: 'border-right-style',
-          //       options: [
-          //         {value: 'none'},
-          //         {value: 'solid'},
-          //         {value: 'dotted'},
-          //         {value: 'dashed'},
-          //         {value: 'double'},
-          //         {value: 'groove'},
-          //         {value: 'ridge'},
-          //         {value: 'inset'},
-          //         {value: 'outset'}
-          //       ]
-          //     },
-          //     {
-          //       name: 'border left Style',
-          //       type: 'select',
-          //       property: 'border-left-style',
-          //       options: [
-          //         {value: 'none'},
-          //         {value: 'solid'},
-          //         {value: 'dotted'},
-          //         {value: 'dashed'},
-          //         {value: 'double'},
-          //         {value: 'groove'},
-          //         {value: 'ridge'},
-          //         {value: 'inset'},
-          //         {value: 'outset'}
-          //       ]
-          //     },
-          //     {
-          //       name: 'Color',
-          //       type: 'color',
-          //       property: 'border-right-color',
-          //     },
-          //     {
-          //       name: 'border left Color',
-          //       type: 'color',
-          //       property: 'border-left-color',
-          //     },
-              
-          //   ]
-          // }
+  
          
        
         ]
@@ -276,7 +221,18 @@ export class AppComponent implements OnInit{
 
       
       commands: {
-        
+        defaults:[
+          {
+            id: 'store-data',
+            run(editor) {
+            //  console.log(this.editor.getComponents());
+              
+            //  alert('d');
+              editor.store();
+             // editor.load();
+            },
+          }
+        ]
         // options
       },
 
@@ -291,18 +247,25 @@ export class AppComponent implements OnInit{
           storeStyles: true,      // Enable/Disable storing of rules in JSON format
           storeHtml: true,        // Enable/Disable storing of components as HTML string
           storeCss: true, 
+          params:{},
+       //   urlStore: ''
+        
 
             //   autosave: false,
             //   setStepsBeforeSave: 1,
             //   type: 'remote',
-        //   urlStore: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts.json',
-           urlLoad: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts/-M_a-ts6Gc60Tm7fDYSN',
+      //   urlStore: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts.json',
+       //    urlLoad: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts.json',
+           
             //   contentTypeJson: true,
       },
-      
+
       
     });
-
+    this.editor.on('storage:load newwww', function(e) {
+      console.log('Loaded ', e);
+    this.editor.render();
+});
     
         const blockManager = this.editor.BlockManager;
         const assetManager = this.editor.AssetManager;
@@ -314,9 +277,20 @@ export class AppComponent implements OnInit{
 
         this.htmlcss = this.editor.runCommand('gjs-get-inlined-html');
 
-        console.log("html",this.htmlvalue);
-        console.log("css",this.cssvalue);
-        console.log("htmlcss",this.htmlcss);
+       
+        
+
+
+
+     //   console.log("html",this.htmlvalue);
+      //  console.log("css",this.cssvalue);
+       // console.log("htmlcss",this.htmlcss);
+
+      
+
+      //  const css=this.editor.getCss();
+
+   
         
        
          this.editor.getConfig().showDevices = false;  //to remove the show device from top
@@ -324,7 +298,7 @@ export class AppComponent implements OnInit{
         //  this.editor.load(res => console.log('Load callback',res));
         // this.editor.store(res => console.log('Store callback',res));
 
-        this.sendpostdata();
+  //    this.sendpostdata();
       
        this.editor.on('storage:load', function(e) {
         
@@ -538,33 +512,40 @@ export class AppComponent implements OnInit{
         panelManager.addButton('options', [ 
           { id: 'save', 
           className: 'fa fa-floppy-o icon-blank', 
-         // command:'save-db',
-          command: function(editor1, sender) { 
-            if (sender)
-            sender.set('active', false);
-          
-           // this.sendpostdata();
-
-          }, 
-          attributes: { title: 'Save Template' } 
+          command: 'save-page',
+       //  command:'save-db',
+         //command:this.addSaveCommand('save',this.editor),
+          // command: function(editor1, sender) { 
+          //   if (sender)
+          //   sender.set('active', true);
+          //  // this.sendpostdata();
+          //   this.jj();
+    
+          // }, 
+    
+          attributes: { title: 'Save Template' },
+         
         }, 
+        this.addSaveCommand('save-page',this.editor)
+      
       ]);
     
         this.editor.Commands.add
         ('save-db', {
             run: function(editor, sender)
             {
-              sender && sender.set('active',false); // turn off the button
-              editor.store();
+            sender && sender.set('active',true); // turn off the button
+             //editor.store();
               console.log("hi");
+            //  this.sendpostdata();
+            this.jj();
               
            //  this.sendpostdata();
-            // alert();
+        
             }
         });
         // this.editor.on('storage:load', function(e) { console.log('Loaded ', e);});
         // this.editor.on('storage:store', function(e) { console.log('Stored ', e);})
-
 
 
        this.editor.DomComponents.addType('content-link', {
@@ -647,13 +628,106 @@ export class AppComponent implements OnInit{
   {
    //this.postservice.oncreateandstorepost(postdata.name,postdata.hobby);
    //alert();
-   this.ScreenService.OnSendPostData(this.htmlvalue,this.cssvalue);
+  //  this.ScreenService.OnSendPostData(this.htmlvalue,this.cssvalue);
+
+  if(this.screenname!="" && this.screenname!=null){
+    const comps = this.editor.getComponents()
+    comps.forEach(comp => {
+        console.log(JSON.stringify(comp.attributes.type))
+        console.log(JSON.stringify(comp.attributes.tagName))
+        console.log(JSON.stringify(comp.attributes.classes))
+        console.log(JSON.stringify(comp.attributes.components))
+        console.log(JSON.stringify(comp.attributes.content))
+      
+        
+    });
+  
+  
+  
+    console.log("comps",JSON.stringify(comps));
+  
+    this.finalgjsvalues=JSON.stringify(comps)+this.cssvalue;
+    console.log("finavalus",this.finalgjsvalues);
+    
+    this.ScreenService.OnSendPostData_new(this.finalgjsvalues,this.screenname);
+    this.editor.store((data) => {
+      console.log('DATA---->>>>', data);
+      this.closeScreeName();
+      
+    });
+   // this.saveRemoteStorage();
+  }
+  else{alert("provide screen name")}
+ 
+
+
+   
    //this.ScreenService.OnSendPostDatasample(7);
   
    
    
   }
- 
+
+  jj()
+  {
+    alert("hi");
+  }
+
+
+  addSaveCommand(commandName, editor) {
+    //alert();
+    const $this = this;
+    editor.Commands.add(commandName, {
+      run: function (e, n) {
+        const eventPopupModel = document.getElementById('myModal');
+        eventPopupModel.style.display = 'block';
+      }
+    });
+
+  }
+
+  closeScreeName() {
+    const model = document.getElementById('myModal');
+    model.style.display = 'none';
+   // const saveButton = this.editor.Panels.getButton('options', 'save-page');
+ //   saveButton.set('active', 0);
+  }
+
+  
+
+  saveRemoteStorage(params = {}) {
+    this.RemoteStorage = this.editor.StorageManager.get('remote');
+    if (Object.keys(params).length > 0) {
+      alert();
+      this.RemoteStorage.set('params', params);
+      this.editor.StorageManager.get('remote').set({
+        urlStore:'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts.json'
+       // urlStore: `${this.modifyTemplateUrl}/${this.templateObj._id}?log_id=${this.logId}`,
+      });
+    } else {
+      alert('else')
+      this.RemoteStorage.set('params', {
+      
+        // 'component-lifecycle': this.componentLifeCycle,
+        // 'special-events': this.specialEvents,
+        // grid_fields: this.agGridObject,
+        // flows_info: this.screenFlows,
+        // route_info: this.routeFlows,
+        // link_info: this.linkArray,
+        // screenName: this.screenName,
+        // is_grid_present: this.is_grid_present,
+        // is_bootStrapTable_present: this.is_bootStrapTable_present,
+        // entity_info: this.screenEntityModel,
+        // project: this.project_id,
+        // feature: this.feature_id,
+        // screenType: this.screenType,
+        // screenOption: this.screenOption,
+        // specific_attribute_Event: this.specific_attribute_Event
+      });
+    }
+    // console.log('REMOTE STORAGE---->>>>', this.RemoteStorage.get('params'));
+    // console.log('CURRENT STORAGE---->>>>', this.editor.StorageManager.getCurrentStorage())
+  }
   
 }
 
