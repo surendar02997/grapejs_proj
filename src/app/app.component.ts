@@ -7,8 +7,14 @@ import { ScreenService } from './screenservice.service';
 import { Post } from './post.model';
 import { Injectable } from '@angular/core';
 declare var $: any;
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+
 
 import { HttpClient } from '@angular/common/http';
+//import * as firebase from 'firebase';
+
 
 
 @Component({
@@ -22,10 +28,11 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit{
 
 
-  constructor(private ScreenService:ScreenService,private http:HttpClient){}
+  constructor(private ScreenService:ScreenService,private http:HttpClient,private db: AngularFirestore){}
 
 
   //logId:any;
+  //logId = sessionStorage.getItem('LogId');
   postdatanew:Post;
 
   htmlvalue:string;
@@ -38,10 +45,46 @@ export class AppComponent implements OnInit{
   htmlcss:string;
 
   editor:any;
- 
+  database;
+  ref;
+postid;
+
+countries;
+
+getfirebasedata() {  
+  this.ScreenService.getAllCountry().subscribe((data: any) => {  
+    
+    console.log(data);  
+
+  });  
+ // this.ScreenService.getAllCountry();
+} 
+
   ngOnInit()
   {
+   
+      
 
+    // this.getfirebasedata();
+
+    
+
+   
+    // this.ScreenService.getdata().subscribe(data => {
+    //   this.postid = data.map(e => {
+    //     return {
+    //       id: e.payload.doc.id,
+    //      // ...e.payload.doc.data()
+    //     } as Post;
+    //   })
+    // });
+
+    // firebase.initializeApp(this.firebaseconfig);
+    // this.database=firebase.database;
+
+    // this.ref=this.database.ref('posts');
+    // this.ref.on('value',this.godata);
+  //  console.log("logid",this.logId);
     
 
 
@@ -55,7 +98,10 @@ export class AppComponent implements OnInit{
       components: null,
       style: null,
     };
- 
+    
+
+   
+
     this.editor = grapesjs.init({
 
       container: '#gjs',
@@ -238,7 +284,7 @@ export class AppComponent implements OnInit{
 
       storageManager: {
         id: 'gjs-',
-          type:'local',
+          type:'remote',
          autoload:true,
           contentTypeJson: true,
           setStepsBeforeSave: 1,
@@ -247,25 +293,29 @@ export class AppComponent implements OnInit{
           storeStyles: true,      // Enable/Disable storing of rules in JSON format
           storeHtml: true,        // Enable/Disable storing of components as HTML string
           storeCss: true, 
-          params:{},
-       //   urlStore: ''
+          headers: {
+            'Content-Type': 'application/json'
+            },
+            json_encode:{
+            "gjs-html": [],
+            "gjs-css": [],
+            },
+
+         urlStore: 'https://mongodb://localhost:2997/grapesjs',
         
 
             //   autosave: false,
             //   setStepsBeforeSave: 1,
             //   type: 'remote',
-      //   urlStore: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts.json',
-       //    urlLoad: 'https://angulartestapp-e2620-default-rtdb.firebaseio.com/posts.json',
+            urlLoad:  'https://mongodb://localhost:2997/grapesjs',
+            //curl 'https://[PROJECT_ID].firebaseio.com/users/jack/name.json'
+          // urlLoad:  this.getAllCountry(),
            
             //   contentTypeJson: true,
       },
-
-      
+     
     });
-    this.editor.on('storage:load newwww', function(e) {
-      console.log('Loaded ', e);
-    this.editor.render();
-});
+   
     
         const blockManager = this.editor.BlockManager;
         const assetManager = this.editor.AssetManager;
@@ -300,20 +350,20 @@ export class AppComponent implements OnInit{
 
   //    this.sendpostdata();
       
-       this.editor.on('storage:load', function(e) {
+      //  this.editor.on('storage:load', function(e) {
         
-        console.log('STORAGE:LOAD ', e);
+      //   console.log('STORAGE:LOAD ', e);
         
         
-      });
-      this.editor.on('storage:store', function(e) {
+      // });
+      // this.editor.on('storage:store', function(e) {
         
-        console.log('STORAGE:STORE ', e);
-      });
-      this.editor.on('storage:error', function(e) {
-        console.log('STORAGE:ERROR ', e);
-      });
-      this.editor= this.editor;
+      //   console.log('STORAGE:STORE ', e);
+      // });
+      // this.editor.on('storage:error', function(e) {
+      //   console.log('STORAGE:ERROR ', e);
+      // });
+      // this.editor= this.editor;
 
     
 
@@ -624,6 +674,10 @@ export class AppComponent implements OnInit{
 
 
   }
+  godata(data){
+console.log(data);
+
+  }
   sendpostdata()
   {
    //this.postservice.oncreateandstorepost(postdata.name,postdata.hobby);
@@ -664,7 +718,7 @@ export class AppComponent implements OnInit{
    
    //this.ScreenService.OnSendPostDatasample(7);
   
-   
+
    
   }
 
@@ -727,7 +781,11 @@ export class AppComponent implements OnInit{
     }
     // console.log('REMOTE STORAGE---->>>>', this.RemoteStorage.get('params'));
     // console.log('CURRENT STORAGE---->>>>', this.editor.StorageManager.getCurrentStorage())
+   
   }
   
+
+
+
 }
 
