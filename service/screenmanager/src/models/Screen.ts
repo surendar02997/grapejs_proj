@@ -113,5 +113,6 @@ export const ScreenSchema = new Schema({
     created_at: {
         type: Date,
         default: Date.now
-    }
+    },
+    scr_name:{}
 })

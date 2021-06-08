@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class = "panel panel-default">
+                <!-- <div class = "panel-heading">Screen Designer</div> -->
+                <h1 class="text-center" style="color: #990066;">Screen Designer Application</h1>
+                <div class = "panel-body">
+                   <h4 class="text-center">Click below to edit the screen according to id</h4>
+                </div>
+                <br>
+                <a >
+                    <ul class = "list-group">
+                        <li class = "list-group-item" *ngFor="let id of ids; let i = index">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div>Screen Name --> {{scrn_names[i]}}</div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <button style="cursor: pointer;" class="btn btn-primary" (click)="OnNavigate(id)">Edit</button>
+                                    <button style="cursor: pointer;margin-left: 5%;" class="btn btn-danger" (click)="OnDelete(id)">Delete</button>
+                                </div>
+                            </div>
+                          
+                          
+                       </li>
+
+                     </ul>
+                </a>
+              
+             </div>
+        </div>
+    </div>
+<br>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4>Create New Design ----> Click here</h4>
+        </div>
+        <div class="col-lg-6">
+            <button [routerLink]="['grapesjs']" class="btn btn-success">New Design</button>
+        </div>
+    </div>
+</div>

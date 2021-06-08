@@ -45,8 +45,21 @@ export class ScreenService{
        })
    }
 
-   getScreenById(): Observable<any> {
-    return this.http.get(`http://localhost:3004/screen/get/444c4c60-bdea-11eb-9d78-0149a7bd3467`);
+   getScreenById(screen_id): Observable<any> {
+    // return this.http.get(`http://localhost:3004/screen/get/444c4c60-bdea-11eb-9d78-0149a7bd3467`);
+    return this.http.get(`http://localhost:3004/screen/get/${screen_id}`);
+  }
+  getScreenById_new(): Observable<any> {
+     return this.http.get(`http://localhost:3004/screen/get/4d83bdd0-be2c-11eb-b3ba-554b74bb5dfc`);
+   // return this.http.get(`http://localhost:3004/screen/get/${screen_id}`);
+  }
+
+  GetAllId(){
+    return this.http.get(`http://localhost:3004/screen/get`);
+  }
+
+  DeleteById(screen_id):Observable<any>{
+  return this.http.delete(`http://localhost:3004/screen/delete/${screen_id}`);
   }
 
 

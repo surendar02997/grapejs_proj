@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
 import { GrapesjsComponent } from './grapesjs/grapesjs.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    GrapesjsComponent
+    GrapesjsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
