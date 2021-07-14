@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+.action-button {
+    border: none;
+    color: white;
+    padding: 3px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    opacity: 0.7;
+  }
+  
+  .action-button:hover {
+    opacity: 1;
+  }
+  
+  .action-button.edit {
+    background-color: #008cba; /* Blue */
+  }
+  .action-button.update {
+    background-color: #4caf50; /* Green */
+  }
+  
+  .action-button.delete {
+    background-color: #f44336; /* Red */
+  }
+  
+  .action-button.cancel {
+    background-color: #e7e7e7; /* Gray */
+    color: black;
+  }
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+  }
+  

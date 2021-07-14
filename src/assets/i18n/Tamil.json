@@ -1,0 +1,97 @@
+{
+    "HOME":{
+        "HEADING":"திரை வடிவமைப்பாளர் பயன்பாடு",
+        "DESCRIPTION_TEXT":"ஐடிக்கு ஏற்ப திரையைத் திருத்த கீழே கிளிக் செய்க",
+        "SCREEN_NAME":"திரை பெயர்",
+        "EDIT_TEXT":"தொகு",
+        "DELETE_TEXT":"அழி",
+        "CLICK_TEXT":"புதிய வடிவமைப்பை உருவாக்கவும் ----> இங்கே கிளிக் செய்க",
+        "NEW_DESIGN_TEXT":"புதிய வடிவமைப்பு",
+        "selectLanguage": "மொழியை தேர்ந்தெடுங்கள்"  
+    },
+    "BLOCKS_LABELS":{
+        "LABEL":"லேபிள்",
+        "HEADING":"தலைப்பு",
+        "PARAGRAPH":"பத்தி",
+        "IMAGE":"படம்",
+        "MAP":"வரைபடம்",
+        "LINK":"யூடியூப் இணைப்பு",
+        "INPUT":"உள்ளீடு",
+        "HIGHCHART":"ஹைச்சார்ட்",
+        "COLUMNS_2":"2 நெடுவரிசைகள்",
+        "TEST_CHART_BLOCk":"சோதனை விளக்கப்படம்",
+        "BASIC_TEXT":"அடிப்படை",
+        "EXTRA_TEXT":"கூடுதல்"
+    },
+    "TRAITS_SETTINGS":{
+        "LABEL":{
+            "FOR":"ஆக",
+            "ID":"ஐடி",
+            "LABEL_NAME":"லேபிள் பெயர்",
+            "TITLE":"தலைப்பு"
+        },
+        "IMAGE":{
+            "ALT":"மாற்று விசை"
+        },
+        "MAP":{
+            "ADDRESS":"முகவரி",
+            "MAP_TYPE":"வரைபட வகை",
+            "ZOOM":"பெரிதாக்கு"
+        },
+        "YOUTUBE":{
+            "HREF":"Href",
+            "TARGET":"இலக்கு"
+        },
+        "INPUT":{
+            "NAME":"பெயர்",
+            "PLACEHOLDER":"ஒதுக்கிட",
+            "TYPE":"வகை",
+            "REQUIRED":"தேவை",
+            "TEXT":"உரை",
+            "EMAIL":"மின்னஞ்சல்",
+            "PASSWORD":"கடவுச்சொல்",
+            "NUMBER":"எண்"
+        },
+        "HIGHCHARTS":{
+            "TYPE":"வகை",
+            "INVERTED":"தலைகீழ்",
+            "TITLE":"தலைப்பு",
+            "ADDSERIES":"தொடரைச் சேர்க்கவும்",
+            "RENDER":"விளக்கப்படத்தை வழங்கவும்",
+            "INVERTED_TRUE":"உண்மை",
+            "INVERTED_FALSE":"தவறு",
+            "COLUMN":"நெடுவரிசை",
+            "BAR":"பார்",
+            "LINE":"வரி",
+            "AREA":"பரப்பளவு",
+            "PIE":"பை"
+        }
+    },
+    "STYLE_SETTINGS":{
+        "TYPOGRAPHY":{
+            "TYPOGRAPHY":"அச்சுக்கலை",
+            "VERTICAL_ALIGN":"செங்குத்து சீரமை",
+            "TEXT_ALIGN":"உரை சீரமை"
+        },
+        "DIMENSION":{
+            "DIMENSION":"பரிமாணம்",
+            "WIDTH":"அகலம்",
+            "MIN_HEIGHT":"நிமிடம் உயரம்",
+            "PADDING":"திணிப்பு"
+        },
+        "EXTRA":{
+            "EXTRA":"கூடுதல்",
+            "B_COLOR":"பின்னணி நிறம்",
+            "BOX_SHADOW":"பெட்டி-நிழல்",
+            "CUSTOM_LABEL":"தனிப்பயன் லேபிள்"
+        },
+        "DECORATION":{
+
+            "DECORATION":"அலங்காரம்",
+            "BORDER":"எல்லை",
+            "BORDER_RADIUS":"எல்லை-ஆரம்",
+            "BORDER_BOTTOMN_COLOR":"எல்லை-கீழ்-வண்ணம்",
+            "CUSTOM_LABEL":"தனிப்பயன் லேபிள்"
+        }
+    }
+}

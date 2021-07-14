@@ -1,0 +1,98 @@
+{
+    "HOME":{
+        "HEADING":"Screen Designer Application",
+        "DESCRIPTION_TEXT":"Click below to edit the screen according to id",
+        "SCREEN_NAME":"Screen Name",
+        "EDIT_TEXT":"Edit",
+        "DELETE_TEXT":"Delete",
+        "CLICK_TEXT":"Create New Design ----> Click here",
+        "NEW_DESIGN_TEXT":"New Design",
+        "selectLanguage": "choose language"      
+    },
+    "BLOCKS_LABELS":{
+        "LABEL":"Label",
+        "HEADING":"Heading",
+        "PARAGRAPH":"Paragraph",
+        "IMAGE":"Image",
+        "MAP":"Map",
+        "LINK":"Youtube Link",
+        "INPUT":"Input",
+        "HIGHCHART":"Highchart",
+        "COLUMNS_2":"2 Columns",
+        "TEST_CHART_BLOCk":"Test Chart",
+        "BASIC_TEXT":"Basic",
+        "EXTRA_TEXT":"Extra"
+    },
+    "TRAITS_SETTINGS":{
+        "LABEL":{
+            "FOR":"for",
+            "ID":"Id",
+            "LABEL_NAME":"Label Name",
+            "TITLE":"Title"
+        },
+        "IMAGE":{
+            "ALT":"alt"
+        },
+        "MAP":{
+            "ADDRESS":"Address",
+            "MAP_TYPE":"Map type",
+            "ZOOM":"Zoom"
+        },
+        "YOUTUBE":{
+            "HREF":"Href",
+            "TARGET":"Target"
+        },
+        "INPUT":{
+            "NAME":"Name",
+            "PLACEHOLDER":"Placeholder",
+            "TYPE":"Type",
+            "REQUIRED":"Required",
+            "TEXT":"Text",
+            "EMAIL":"Email",
+            "PASSWORD":"Password",
+            "NUMBER":"Number"
+        },
+        "HIGHCHARTS":{
+            "TYPE":"Type",
+            "INVERTED":"Inverted",
+            "TITLE":"Title",
+            "ADDSERIES":"Add Series",
+            "RENDER":"Render Chart",
+            "INVERTED_TRUE":"True",
+            "INVERTED_FALSE":"False",
+            "COLUMN":"column",
+            "BAR":"bar",
+            "LINE":"line",
+            "AREA":"area",
+            "PIE":"pie"
+        }
+    },
+    "STYLE_SETTINGS":{
+        "TYPOGRAPHY":{
+            "TYPOGRAPHY":"Typography",
+            "VERTICAL_ALIGN":"Vertical Align",
+            "TEXT_ALIGN":"Text Align"
+        },
+        "DIMENSION":{
+            "DIMENSION":"Dimension",
+            "WIDTH":"width",
+            "MIN_HEIGHT":"min-height",
+            "PADDING":"Padding"
+        },
+        "EXTRA":{
+            "EXTRA":"Extra",
+            "B_COLOR":"background-color",
+            "BOX_SHADOW":"box-shadow",
+            "CUSTOM_LABEL":"Custom Label"
+        },
+        "DECORATION":{
+
+            "DECORATION":"decoration",
+            "BORDER":"border",
+            "BORDER_RADIUS":"border-radius",
+            "BORDER_BOTTOMN_COLOR":"Border-bottom-Color",
+            "CUSTOM_LABEL":"Custom Label"
+        }
+    }
+
+}

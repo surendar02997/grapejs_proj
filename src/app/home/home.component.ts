@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
 import { ScreenService } from '../screenservice.service';
 
 @Component({
@@ -12,7 +13,11 @@ import { ScreenService } from '../screenservice.service';
 
 export class HomeComponent implements OnInit{
  
-  constructor(private http:HttpClient,private router: Router,private screenservice:ScreenService,private activatedroute:ActivatedRoute) { }
+  constructor(private http:HttpClient,private router: Router,private screenservice:ScreenService,private activatedroute:ActivatedRoute) { 
+
+  
+
+  }
 
   
    ids=[];

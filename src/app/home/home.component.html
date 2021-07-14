@@ -3,9 +3,9 @@
         <div class="col-md-12">
             <div class = "panel panel-default">
                 <!-- <div class = "panel-heading">Screen Designer</div> -->
-                <h1 class="text-center" style="color: #990066;">Screen Designer Application</h1>
+                <h1 class="text-center" style="color: #990066;">{{'HOME.HEADING' | translate}}</h1>
                 <div class = "panel-body">
-                   <h4 class="text-center">Click below to edit the screen according to id</h4>
+                   <h4 class="text-center">{{'HOME.DESCRIPTION_TEXT' | translate}}</h4>
                 </div>
                 <br>
                 <a >
@@ -13,11 +13,11 @@
                         <li class = "list-group-item" *ngFor="let id of ids; let i = index">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <div>Screen Name --> {{scrn_names[i]}}</div>
+                                    <div>{{'HOME.SCREEN_NAME' | translate}} --> {{scrn_names[i]}}</div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <button style="cursor: pointer;" class="btn btn-primary" (click)="OnNavigate(id)">Edit</button>
-                                    <button style="cursor: pointer;margin-left: 5%;" class="btn btn-danger" (click)="OnDelete(id)">Delete</button>
+                                    <button style="cursor: pointer;" class="btn btn-primary" (click)="OnNavigate(id)">{{'HOME.EDIT_TEXT' | translate}}</button>
+                                    <button style="cursor: pointer;margin-left: 5%;" class="btn btn-danger" (click)="OnDelete(id)">{{'HOME.DELETE_TEXT' | translate}}</button>
                                 </div>
                             </div>
                           
@@ -33,10 +33,10 @@
 <br>
     <div class="row">
         <div class="col-lg-6">
-            <h4>Create New Design ----> Click here</h4>
+            <h4>{{'HOME.CLICK_TEXT' | translate}}</h4>
         </div>
         <div class="col-lg-6">
-            <button [routerLink]="['grapesjs']" class="btn btn-success">New Design</button>
+            <button [routerLink]="['grapesjs']" class="btn btn-success">{{'HOME.NEW_DESIGN_TEXT' | translate}}</button>
         </div>
     </div>
 </div>

@@ -1,0 +1,98 @@
+{
+    "HOME":{
+        "HEADING":"Aplicación de diseñador de pantalla",
+        "DESCRIPTION_TEXT":"Haga clic a continuación para editar la pantalla de acuerdo con la identificación",
+        "SCREEN_NAME":"Nombre de pantalla",
+        "EDIT_TEXT":"Editar",
+        "DELETE_TEXT":"Borrar",
+        "CLICK_TEXT":"Crear nuevo diseño ----> Haga clic aquí",
+        "NEW_DESIGN_TEXT":"Nuevo diseño",
+        "selectLanguage": "elige lengua"      
+    },
+    "BLOCKS_LABELS":{
+        "LABEL":"Etiqueta",
+        "HEADING":"Bóveda",
+        "PARAGRAPH":"Párrafo",
+        "IMAGE":"Imagen",
+        "MAP":"Mapa",
+        "LINK":"Enlace de Youtube",
+        "INPUT":"Aporte",
+        "HIGHCHART":"Highchart",
+        "COLUMNS_2":"2 columnas",
+        "TEST_CHART_BLOCk":"Tabla de prueba",
+        "BASIC_TEXT":"Básico",
+        "EXTRA_TEXT":"Extra"
+    },
+    "TRAITS_SETTINGS":{
+        "LABEL":{
+            "FOR":"por",
+            "ID":"Identificación",
+            "LABEL_NAME":"Nombre de etiqueta",
+            "TITLE":"Título"
+        },
+        "IMAGE":{
+            "ALT":""
+        },
+        "MAP":{
+            "ADDRESS":"Habla a",
+            "MAP_TYPE":"Tipo de mapa",
+            "ZOOM":""
+        },
+        "YOUTUBE":{
+            "HREF":"Href",
+            "TARGET":"Objetivo"
+        },
+        "INPUT":{
+            "NAME":"Nombre",
+            "PLACEHOLDER":"Marcador de posición",
+            "TYPE":"Tipo",
+            "REQUIRED":"Requerido",
+            "TEXT":"Texto",
+            "EMAIL":"Correo electrónico",
+            "PASSWORD":"Contraseña",
+            "NUMBER":"Número"
+        },
+        "HIGHCHARTS":{
+            "TYPE":"Tipo",
+            "INVERTED":"Invertido",
+            "TITLE":"Título",
+            "ADDSERIES":"Agregar serie",
+            "RENDER":"Gráfico de renderizado",
+            "INVERTED_TRUE":"Cierto",
+            "INVERTED_FALSE":"Falso",
+            "COLUMN":"columna",
+            "BAR":"bar",
+            "LINE":"línea",
+            "AREA":"área",
+            "PIE":"tarta"
+        }
+    },
+    "STYLE_SETTINGS":{
+        "TYPOGRAPHY":{
+            "TYPOGRAPHY":"Tipografía",
+            "VERTICAL_ALIGN":"Alineación vertical",
+            "TEXT_ALIGN":"Texto alineado"
+        },
+        "DIMENSION":{
+            "DIMENSION":"Dimension",
+            "WIDTH":"ancho",
+            "MIN_HEIGHT":"altura mínima",
+            "PADDING":"Relleno"
+        },
+        "EXTRA":{
+            "EXTRA":"Extra",
+            "B_COLOR":"color de fondo",
+            "BOX_SHADOW":"sombra de la caja",
+            "CUSTOM_LABEL":"Etiqueta personalizada"
+        },
+        "DECORATION":{
+
+            "DECORATION":"decoración",
+            "BORDER":"frontera",
+            "BORDER_RADIUS":"radio de borde",
+            "BORDER_BOTTOMN_COLOR":"Color del borde inferior",
+            "CUSTOM_LABEL":"Etiqueta personalizada"
+        }
+    }
+
+}
