@@ -13,7 +13,7 @@ export class ScreenService{
 
     sample:number=5;
 
-
+  
     OnSendPostData_new(gjscomps:string,screenname:string){
        
       const postdata:Post={gjscomps,screenname};
@@ -36,6 +36,7 @@ export class ScreenService{
           
       })
   }
+  
 
     OnSendPostDatasample(newvalue:number){
     

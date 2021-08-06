@@ -29,7 +29,7 @@
     "base-64": "^1.0.0",
     "bootstrap": "^5.0.1",
     "firebase": "7.14.6",
-    "grapesjs": "^0.17.19",
+    "grapesjs": "^0.17.22",
     "grapesjs-firestore": "^0.1.1",
     "highcharts": "^9.1.0",
     "i18next": "^20.3.2",
