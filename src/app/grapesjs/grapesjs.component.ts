@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
+
 import grapesjs from 'node_modules/grapesjs';
+
 
 import 'grapesjs-firestore';
 
@@ -10,7 +13,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { ScreenService } from '../screenservice.service';
 import { HighchartModel } from '../highchart.model';
 import { IEntity } from '../Entity';
-import { GridOptions } from 'ag-grid-community';
+import { GridOptions, initialiseAgGridWithAngular1 } from 'ag-grid-community';
 import { TranslateService } from '@ngx-translate/core';
 
 //import * as Highcharts from 'highcharts';
@@ -104,7 +107,7 @@ user:{id:string};
   constructor(private ScreenService:ScreenService,
     private route:ActivatedRoute,
     private router:Router,
-    private TranslateService:TranslateService
+    private TranslateService:TranslateService,
     ){ 
       // TranslateService.addLangs(['English','Tamil']);
       // TranslateService.setDefaultLang('English');
@@ -411,7 +414,7 @@ user:{id:string};
  
     this.user={id:this.route.snapshot.params['id']};
 
-   
+
     this.screen_id=this.user.id;
     console.log("screen id",this.screen_id);
   
@@ -1370,7 +1373,7 @@ removeGridRowButton($this) {
     var series_name_values=[];
     var series_data_values=[];
     
-    
+    var chartTitle1;
     var myChart;
     comps.addType(buttonName, {
      
@@ -1479,9 +1482,7 @@ removeGridRowButton($this) {
                   { value: 'line', name: this.highchart_line_trait },
                   { value: 'column', name: this.highchart_column_trait },
                   { value: 'area', name: this.highchart_area_trait },
-                  { value: 'pie', name: this.highchart_pie_trait },
-                
-                  
+                  { value: 'pie', name: this.highchart_pie_trait },  
                 ],
                 changeProp: 1
               },
@@ -1537,7 +1538,25 @@ removeGridRowButton($this) {
                   
 
                 },
-              }
+              },
+              {
+                label:'sample',
+                type:'text',
+                name:'sample',
+                changeProp: 1
+              },
+              {
+                text: 'save sample',
+                type: 'button',
+               // name:'AddSeriesData',
+                full: true,
+                command: () => {
+
+                const component = editor.getSelected();
+                console.log(component.getTrait('sample').props().value);
+
+                },
+              },
            
        
             ]
@@ -1547,11 +1566,12 @@ removeGridRowButton($this) {
           init() {
 
             this.listenTo(this, 'change:charttype', this.chartType);
-            this.listenTo(this,'change:charttitle',this.chartTitle);
+            this.listenTo(this,'change:charttitle',chartTitle1=this.chartTitle);
             this.listenTo(this,'change:chartinverted',this.chartInverted);
            // this.listenTo(this,'change:RenderChart',this.chartTitle);
 
           },
+          
           chartType() { 
            const view = this.getView(); 
            view && view.render();

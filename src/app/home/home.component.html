@@ -1,16 +1,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <div class = "panel panel-default">
+            <div class="panel panel-default">
                 <!-- <div class = "panel-heading">Screen Designer</div> -->
                 <h1 class="text-center" style="color: #990066;">{{'HOME.HEADING' | translate}}</h1>
-                <div class = "panel-body">
-                   <h4 class="text-center">{{'HOME.DESCRIPTION_TEXT' | translate}}</h4>
+                <div class="panel-body">
+                    <h4 class="text-center">{{'HOME.DESCRIPTION_TEXT' | translate}}</h4>
                 </div>
                 <br>
-                <a >
-                    <ul class = "list-group">
-                        <li class = "list-group-item" *ngFor="let id of ids; let i = index">
+                <a>
+                    <ul class="list-group">
+                        <li class="list-group-item" *ngFor="let id of ids; let i = index">
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div>{{'HOME.SCREEN_NAME' | translate}} --> {{scrn_names[i]}}</div>
@@ -20,17 +20,17 @@
                                     <button style="cursor: pointer;margin-left: 5%;" class="btn btn-danger" (click)="OnDelete(id)">{{'HOME.DELETE_TEXT' | translate}}</button>
                                 </div>
                             </div>
-                          
-                          
-                       </li>
 
-                     </ul>
+
+                        </li>
+
+                    </ul>
                 </a>
-              
-             </div>
+
+            </div>
         </div>
     </div>
-<br>
+    <br>
     <div class="row">
         <div class="col-lg-6">
             <h4>{{'HOME.CLICK_TEXT' | translate}}</h4>
